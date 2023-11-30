@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "react-native";
 import MapView, { Marker } from "react-native-maps";
 
-export default function Map({ navigation }) {
+export default function Map({ navigation, route }) {
   const [selectedLocation, setSelectedLocation] = useState(null);
   function confirmLocationHandler() {
     navigation.navigate("Profile", { selectedCoord: selectedLocation });
@@ -11,8 +11,12 @@ export default function Map({ navigation }) {
     <>
       <MapView
         initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
+          latitude: route.params.initialLocation
+            ? route.params.initialLocation.latitude
+            : 37.78825,
+          longitude: route.params.initialLocation
+            ? route.params.initialLocation.longitude
+            : -122.4324,
           latitudeDelta: 0.0922,
           longitudeDelta: 0.0421,
         }}
@@ -24,7 +28,7 @@ export default function Map({ navigation }) {
           });
         }}
       >
-        <Marker coordinate={selectedLocation} />
+        {selectedLocation && <Marker coordinate={selectedLocation} />}
       </MapView>
       <Button
         disabled={!selectedLocation}
