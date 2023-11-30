@@ -11,6 +11,7 @@ import Signup from "./components/Signup";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "./firebase/firebaseSetup";
 import Profile from "./components/Profile";
+import Map from "./components/Map";
 
 const Stack = createNativeStackNavigator();
 const AuthStack = (
@@ -82,6 +83,7 @@ const AppStack = (
         //use route prop to extrat goal text and set it on title
       }
     />
+    <Stack.Screen name="Map" component={Map} />
   </>
 );
 export default function App() {

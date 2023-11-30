@@ -4,6 +4,7 @@ import * as ImagePicker from "expo-image-picker";
 
 export default function ImageManager({ passImageUri }) {
   const [status, requestPermission] = ImagePicker.useCameraPermissions();
+
   const [imageUri, setImageUri] = useState("");
   const verifyPermission = async () => {
     if (status.granted) {
